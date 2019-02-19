@@ -1,0 +1,60 @@
+@import '../../app.component.scss';
+@import '../planet-list/planet-list.component.scss';
+$background-detail-item : rgb(7, 27, 36);
+.container{
+    margin: 40px auto 0;
+    padding: 7% 0;
+    width: 40%;
+    text-align: center;
+    color:white;
+    button{
+        cursor: pointer;
+        margin-bottom:6%;
+        background-color: white;
+        padding: 7px 16px 7px 16px;
+        border-radius: 6px;
+        border: none;
+        font-weight: bold;
+        font-size: 17px;
+        text-transform: uppercase;
+        &:hover{
+            background-color: $title-color;
+        }
+    }
+    .details{
+        .planet-name{
+            margin-bottom:3%;
+            font-size: 38px;
+            font-family: $orbitron;
+            color: $title-color;
+        }
+        .details-list{
+            list-style-type: none;
+            li{
+                background-color: $background-detail-item;
+                padding: 18px 36px 36px 36px;
+                margin-bottom: 3%;
+                .description{
+                    font-size: 18px;
+                    float:left;
+                    background-color: $background-detail-item;
+                }
+                .value{
+                    color: $title-color;
+                    font-weight: bold;
+                    font-size: 18px;
+                    float: right;
+                    background-color: $background-detail-item;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .details-list{
+        li{
+            font-size: 5px;
+        }
+    }
+}

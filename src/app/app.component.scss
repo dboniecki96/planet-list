@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:400,700,800');
+@import url('https://fonts.googleapis.com/css?family=Orbitron:700');
+$background-color: rgb(5,19,25);
+$title-color: rgb(158,226,255);
+$roboto: 'Roboto', sans-serif;
+$orbitron: 'Orbitron', sans-serif;
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: $roboto;
+}

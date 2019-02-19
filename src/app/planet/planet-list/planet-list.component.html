@@ -1,0 +1,36 @@
+<div class="container" *ngIf="allDataLoaded">
+  <h1 class="title">Planet List</h1>
+  <div class="input">
+    <input type="text" placeholder="Search for planet" name="searchbar" class="searchbar" id="searchbar"
+      [(ngModel)]="planetName" />
+  </div>
+  <div class="list">
+    <ul class="planet-list">
+      <li class="planet-item"
+        *ngFor="let planet of planets | planetName: planetName | paginate: {itemsPerPage: currentPageSize, currentPage: pageNumber} ">
+        <a class="planet-link">
+          <p class="planet-name">{{planet.name}}</p>
+          <i title="See more about {{planet.name}}" routerLink="/planets/{{planet.url.split('/')[5]}}"
+            class="fas fa-ellipsis-h fa-2x"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="pagination">
+    <pagination-controls previousLabel="" nextLabel="" (pageChange)="pageNumber = $event"></pagination-controls>
+  </div>
+  <div class="page-size">
+    <h4>Select page size</h4>
+    <select class="select-page-size" name="pageSize" id="pageSize" (change)="changePageSize($event.target.value)">
+      <option *ngFor="let size of pageSizes">{{size}}</option>
+    </select>
+  </div>
+  <div class="footer">
+    <p> Created by <span>Dominik Boniecki</span>, 2019</p>
+    <a href="https://boniecki.netlify.com/">boniecki.netlify.com</a>
+  </div>
+</div>
+<app-loading *ngIf="!allDataLoaded"></app-loading>
+
+<router-outlet></router-outlet>

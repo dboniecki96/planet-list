@@ -26,7 +26,8 @@ export class PlanetDetailComponent implements OnInit {
             this.allDataLoaded = true;
           },
           err => {
-            console.log(err)
+            alert("ERROR! Couldn't load details");
+            console.log(err);
           }
         );
       }

@@ -36,13 +36,15 @@ export class PlanetListComponent implements OnInit {
                 this.allDataLoaded = true;
                 console.log('All data loaded: ' + this.allDataLoaded);
               }
+            },
+            err=>{
+              alert("ERROR! Couldn't load data");
             }
           );
-
         }
-
       },
       err => {
+        alert("ERROR! Couldn't load data");
         console.log(err);
       }
     );

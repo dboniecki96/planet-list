@@ -426,7 +426,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PlanetService = /** @class */ (function () {
     function PlanetService(http) {
         this.http = http;
-        this.url = 'https://swapi.co/api/planets/';
+        this.url = 'https://swapi.dev/api/planets/';
     }
     //get info about planet list (count, results, etc.)
     PlanetService.prototype.getInfo = function () {

@@ -5,7 +5,7 @@ import { PlanetDetails } from '../models/planet-detail.model';
 
 @Injectable()
 export class PlanetService {
-  url = 'https://swapi.co/api/planets/';
+  url = 'https://swapi.dev/api/planets/';
   constructor(private http: HttpClient) { }
 
   //get info about planet list (count, results, etc.)

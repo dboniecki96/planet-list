@@ -1,19 +1,19 @@
-import { Planet } from '../models/planet.model';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { PlanetDetails } from '../models/planet-detail.model';
+import {PlanetDetails, PlanetsInfo} from '../models/planet.model';
+import {HttpClient}                 from '@angular/common/http';
+import {Injectable}                 from '@angular/core';
+import {Observable}                 from 'rxjs';
+import {API_ROOT, planetByNumber}   from './api';
 
 @Injectable()
 export class PlanetService {
-  url = 'https://swapi.dev/api/planets/';
-  constructor(private http: HttpClient) { }
-
-  //get info about planet list (count, results, etc.)
-  getInfo() {
-    return this.http.get<Planet>(this.url);
+  constructor(private http: HttpClient) {
   }
-  //get planet detail by url
-  getPlanetDetail(planetNumber: number) {
-    return this.http.get<PlanetDetails>(this.url + planetNumber.toString() + '/');
+
+  getInfo(): Observable<PlanetsInfo> {
+    return this.http.get<PlanetsInfo>(API_ROOT);
+  }
+
+  getPlanetDetail(planetNumber: number): Observable<PlanetDetails> {
+    return this.http.get<PlanetDetails>(planetByNumber(planetNumber));
   }
 }

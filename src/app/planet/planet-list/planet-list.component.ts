@@ -1,8 +1,7 @@
-import { PlanetNamePipe } from './planet.pipe';
-import { PlanetService } from './../service/planet.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { PlanetDetails } from '../models/planet-detail.model';
-import 'rxjs/add/operator/delay';
+import {PlanetService}                               from '../service/planet.service';
+import {Component, OnInit, ViewEncapsulation}        from '@angular/core';
+import {PaginatorConfig, PlanetDetails, PlanetsInfo} from '../models/planet.model';
+
 @Component({
   selector: 'app-planet-list',
   templateUrl: './planet-list.component.html',
@@ -10,55 +9,49 @@ import 'rxjs/add/operator/delay';
   encapsulation: ViewEncapsulation.None
 })
 export class PlanetListComponent implements OnInit {
-  pageNumber = 1;
-  pageCount: number;
-  planetCount: number;
-  planets: PlanetDetails[] = [];
-  pageSizes = [5, 10, 25, 100];
-  currentPageSize = 5;
+  paginatorConfig: PaginatorConfig;
+  planets: PlanetDetails[];
   planetName: string;
-  allDataLoaded: boolean = false;
-  list: any;
-  constructor(private planetService: PlanetService) { }
+  isLoading: boolean;
+
+  constructor(private planetService: PlanetService) {
+    this.isLoading = false;
+    this.planets = null;
+    this.paginatorConfig = {
+      currentPage: 1,
+      pageSizes: [5, 10, 25, 100],
+      itemsPerPage: 5,
+      totalItems: 0
+    };
+  }
 
   ngOnInit() {
-    this.list = this.planetService.getInfo().subscribe(
-      res => {
-        //Get planet count
-        this.planetCount = res.count;
-        console.log('Planet count: ' + this.planetCount);
-        for (var i = 1; i < this.planetCount + 1; i++) {
-          this.planetService.getPlanetDetail(i).subscribe(
-            res => {
-              this.planets.push(res);
-              console.log(this.planets.length);
-              if (this.planets.length === this.planetCount) {
-                this.allDataLoaded = true;
-                console.log('All data loaded: ' + this.allDataLoaded);
-              }
-            },
-            err=>{
-              alert("ERROR! Couldn't load data");
-            }
-          );
-        }
-      },
-      err => {
-        alert("ERROR! Couldn't load data");
-        console.log(err);
-      }
-    );
-
+    this.planetService.getInfo().subscribe((info: PlanetsInfo) => {
+      this.paginatorConfig.totalItems = info.count;
+      this.getPlanets();
+    }, () => alert('ERROR! Couldn\'t load items'));
   }
 
-  changePageSize(event: any) {
-    this.currentPageSize = event;
-    console.log(this.currentPageSize);
-  }
-  searchPlanet() {
-    this.planets = this.planets.filter(x => {
-      return x.name.toLocaleLowerCase().includes(this.planetName.toLocaleLowerCase());
-    });
+  getPlanets(): void {
+    this.planets = null;
+    this.isLoading = true;
+    const planets: Array<PlanetDetails> = [];
+    const iterator = (start: boolean = false) =>
+      (+this.paginatorConfig.itemsPerPage * (+this.paginatorConfig.currentPage - (start ? 1 : 0)));
+    for (let i = iterator(true); i < iterator(); i++) {
+      this.planetService.getPlanetDetail(i + 1).subscribe(detail => planets.push(detail));
+    }
+    this.planets = planets;
+    this.isLoading = false;
   }
 
+  onChangePage(page: number): void {
+    this.paginatorConfig.currentPage = page;
+    this.getPlanets();
+  }
+
+  onChangePageSize($event: any): void {
+    this.paginatorConfig.itemsPerPage = $event.target.value;
+    this.getPlanets();
+  }
 }

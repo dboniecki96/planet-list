@@ -1,53 +1,41 @@
-<div class="container" *ngIf="allDataLoaded">
-    <button routerLink="../">Back</button>
-    <div class="details">
-        <h3 class="planet-name">{{planetDetails.name}}</h3>
-        <ul class="details-list">
-            <li>
-                <p class="description">Rotation period</p>
-                <p class="value">{{planetDetails.rotation_period}}</p>
-            </li>
-            <li>
-                <p class="description">Orbital period</p>
-                <p class="value">{{planetDetails.orbital_period}}</p>
-            </li>
-            <li>
-                <p class="description">Diameter</p>
-                <p class="value">{{planetDetails.diameter}}</p>
-            </li>
-            <li>
-                <p class="description">Climate</p>
-                <p class="value">{{planetDetails.climate}}</p>
-            </li>
-            <li>
-                <p class="description">Gravity</p>
-                <p class="value">{{planetDetails.gravity}}</p>
-            </li>
-            <li>
-                <p class="description">Terrain</p>
-                <p class="value">{{planetDetails.terrain}}</p>
-            </li>
-            <li>
-                <p class="description">Surface water</p>
-                <p class="value">{{planetDetails.surface_water}}</p>
-            </li>
-            <li>
-                <p class="description">Population</p>
-                <p class="value">{{planetDetails.population}}</p>
-            </li>
-            <!-- <li>
-                <p class="description">Residents</p>
-                <p class="value"></p>
-            </li> -->
-        </ul>
-        <!-- <ul>
-            <li *ngFor="let resident of planetDetails.residents">{{resident}}</li>
-        </ul>
-        <p>Films:</p>
-        <ul>
-            <li *ngFor="let film of planetDetails.films">{{film}}</li>
-        </ul>
-        <a href="{{planetDetails.url}}">URL: {{planetDetails.url}}</a> -->
-    </div>
+<app-loading *ngIf="!(planetDetails$ | async)"></app-loading>
+<div class="container" *ngIf="(planetDetails$ | async) as details">
+  <button routerLink="../">Back</button>
+  <div class="details">
+    <h3 class="planet-name">{{details.name}}</h3>
+    <ul class="details-list">
+      <li>
+        <p class="description">Rotation period</p>
+        <p class="value">{{details.rotation_period}}</p>
+      </li>
+      <li>
+        <p class="description">Orbital period</p>
+        <p class="value">{{details.orbital_period}}</p>
+      </li>
+      <li>
+        <p class="description">Diameter</p>
+        <p class="value">{{details.diameter}}</p>
+      </li>
+      <li>
+        <p class="description">Climate</p>
+        <p class="value">{{details.climate}}</p>
+      </li>
+      <li>
+        <p class="description">Gravity</p>
+        <p class="value">{{details.gravity}}</p>
+      </li>
+      <li>
+        <p class="description">Terrain</p>
+        <p class="value">{{details.terrain}}</p>
+      </li>
+      <li>
+        <p class="description">Surface water</p>
+        <p class="value">{{details.surface_water}}</p>
+      </li>
+      <li>
+        <p class="description">Population</p>
+        <p class="value">{{details.population}}</p>
+      </li>
+    </ul>
+  </div>
 </div>
-<app-loading *ngIf="!allDataLoaded"></app-loading>

@@ -1,29 +1,35 @@
-<div class="container" *ngIf="allDataLoaded">
+<div class="container" *ngIf="!isLoading && planets">
   <h1 class="title">Planet List</h1>
   <div class="input">
-    <input type="text" placeholder="Search for planet" name="searchbar" class="searchbar" id="searchbar"
-      [(ngModel)]="planetName" />
+    <label for="searchbar"></label>
+    <input type="text"
+           placeholder="Search for planet"
+           name="searchbar"
+           class="searchbar"
+           id="searchbar"
+           [(ngModel)]="planetName"
+    />
   </div>
   <div class="list">
     <ul class="planet-list">
       <li class="planet-item"
-        *ngFor="let planet of planets | planetName: planetName | paginate: {itemsPerPage: currentPageSize, currentPage: pageNumber} ">
+          *ngFor="let planet of planets | planetName: planetName | paginate: paginatorConfig; index as i">
         <a class="planet-link">
           <p class="planet-name">{{planet.name}}</p>
           <i title="See more about {{planet.name}}" routerLink="/planets/{{planet.url.split('/')[5]}}"
-            class="fas fa-ellipsis-h fa-2x"></i>
+             class="fas fa-ellipsis-h fa-2x"></i>
         </a>
       </li>
     </ul>
   </div>
 
   <div class="pagination">
-    <pagination-controls previousLabel="" nextLabel="" (pageChange)="pageNumber = $event"></pagination-controls>
+    <pagination-controls previousLabel="" nextLabel="" (pageChange)="onChangePage($event)"></pagination-controls>
   </div>
   <div class="page-size">
-    <h4>Select page size</h4>
-    <select class="select-page-size" name="pageSize" id="pageSize" (change)="changePageSize($event.target.value)">
-      <option *ngFor="let size of pageSizes">{{size}}</option>
+    <label for="pageSize"></label>
+    <select class="select-page-size" name="pageSize" id="pageSize" (change)="onChangePageSize($event)">
+      <option *ngFor="let size of paginatorConfig.pageSizes">{{size}}</option>
     </select>
   </div>
   <div class="footer">
@@ -31,6 +37,6 @@
     <a href="https://boniecki.netlify.com/">boniecki.netlify.com</a>
   </div>
 </div>
-<app-loading *ngIf="!allDataLoaded"></app-loading>
+<app-loading *ngIf="isLoading"></app-loading>
 
 <router-outlet></router-outlet>

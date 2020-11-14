@@ -1,142 +1,170 @@
 @import '../../app.component.scss';
-@mixin paginationHover{
-    background-color: $title-color;
-    border-radius: 50%;
-    span{
-        background-color: $title-color;
-        color: $background-color;
-    }
-}
-@mixin container{
-    margin: 40px auto 0;
-    padding: 7% 0;
-    width: 33%;
-}
-.container{
-    @include container;
-    .title{
-        font-family: $orbitron;
-        font-size: 34px;
-        color: $title-color; 
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-bottom: 27px;
-    }
-    .input{
-        text-align: center;
-        .searchbar{
-            background-color:rgb(19, 19, 19);
-            width: 90%;
-            height: 30px;
-            border: none;
-            padding: 3%;
-            font-size: 20px;
-            font-weight: 600;
-            outline: none;
-            caret-color: white;
-            color:white;
-            &::placeholder{
-                color: lightgrey;
-            }
-        }
-    }
-    .list{
-        margin: 20px 8px 28px 8px;
-        .planet-list{
-            list-style-type: none;
-            .planet-item{
-                padding: 3%;
-                margin: 0 2px 0 2px;
-                height: 35px;
-                &:hover{
-                    border-bottom: 6px solid $title-color;
-                    .planet-name{
-                        color: $title-color;
-                    }
-                }
-                .planet-name{
-                    color:white;
-                    font-weight: bold;
-                    font-size: 24px;
-                    float: left;
 
-                }
-                .fas{
-                    cursor: pointer;
-                    float: right;
-                    color: $title-color;
-                    &:hover{
-                        color: #389bc5;
-                    }
-                }
-            }
-        }  
+@mixin paginationHover {
+  background-color: $title-color;
+  border-radius: 50%;
+  span {
+    background-color: $title-color;
+    color: $background-color;
+  }
+}
+
+@mixin container {
+  margin: 40px auto 0;
+  padding: 7% 0;
+  width: 33%;
+}
+
+.container {
+  @include container;
+
+  .title {
+    font-family: $orbitron;
+    font-size: 34px;
+    color: $title-color;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 27px;
+  }
+
+  .input {
+    text-align: center;
+
+    .searchbar {
+      background-color: rgb(19, 19, 19);
+      width: 90%;
+      height: 30px;
+      border: none;
+      padding: 3%;
+      font-size: 20px;
+      font-weight: 600;
+      outline: none;
+      caret-color: white;
+      color: white;
+
+      &::placeholder {
+        color: lightgrey;
+      }
     }
-    .page-size{
-        text-align: center;
-        margin-bottom: 15px;
-        h4{
-            margin-bottom: 9px;
+  }
+
+  .list {
+    margin: 20px 8px 28px 8px;
+
+    .planet-list {
+      list-style-type: none;
+
+      .planet-item {
+        padding: 3%;
+        margin: 0 2px 0 2px;
+        height: 35px;
+
+        &:hover {
+          border-bottom: 6px solid $title-color;
+
+          .planet-name {
             color: $title-color;
-        }
-        .select-page-size{
-            width: 15%;
-            border: none;
-            padding: 4px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 6px;
-            background-color:rgb(206, 233, 245);
-            text-transform: uppercase;
-            option{
-                text-align: center;
-                color:white;
-                font-size: 15px;
-            }
-        }
-    }
-    
-    .pagination {
-        text-align: center;
-        font-size: 20px;
-        margin: 25px 0 25px 0;
-        .current{
-            @include paginationHover;
-        }
-        li{
-            a{
-                color: white;
-                &:hover{
-                    @include paginationHover;  
-                }   
-            }  
-        }
-        .pagination-previous,.pagination-next{
-          a:hover{
-              color: $background-color;
           }
         }
-    }
-    .footer{
-        text-align:center;
-        font-size: 14px;
-        margin-top: 50px;
-        p{
-            margin-bottom: 15px;
-            color:lightgrey;
-            text-transform: uppercase;
-            span{
-                font-weight: bold;
-                color: $title-color;
-            }
+
+        .planet-name {
+          color: white;
+          font-weight: bold;
+          font-size: 24px;
+          float: left;
+
         }
-        a{
-            text-decoration: none;
-            color: lightgrey;
-            &:hover{
-                color: $title-color;
-            }
+
+        .fas {
+          cursor: pointer;
+          float: right;
+          color: $title-color;
+
+          &:hover {
+            color: #389bc5;
+          }
         }
+      }
     }
+  }
+
+  .page-size {
+    text-align: center;
+    margin-bottom: 15px;
+
+    h4 {
+      margin-bottom: 9px;
+      color: $title-color;
+    }
+
+    .select-page-size {
+      width: 15%;
+      border: none;
+      padding: 4px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 6px;
+      background-color: rgb(206, 233, 245);
+      text-transform: uppercase;
+
+      option {
+        text-align: center;
+        color: white;
+        font-size: 15px;
+      }
+    }
+  }
+
+  .pagination {
+    text-align: center;
+    font-size: 20px;
+    margin: 25px 0 25px 0;
+
+    .current {
+      @include paginationHover;
+    }
+
+    li {
+      a {
+        color: white;
+
+        &:hover {
+          @include paginationHover;
+        }
+      }
+    }
+
+    .pagination-previous, .pagination-next {
+      a:hover {
+        color: $background-color;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 50px;
+
+    p {
+      margin-bottom: 15px;
+      color: lightgrey;
+      text-transform: uppercase;
+
+      span {
+        font-weight: bold;
+        color: $title-color;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: lightgrey;
+
+      &:hover {
+        color: $title-color;
+      }
+    }
+  }
 }
